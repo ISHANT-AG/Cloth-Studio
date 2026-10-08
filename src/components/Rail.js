@@ -294,8 +294,10 @@ export class ClothingRail {
       return;
     }
 
-    const itemSlotWidth = 112; // Stable slot width matching rail.css
-    const targetCenter = (this.activeIndex * itemSlotWidth) + (itemSlotWidth / 2);
+    const activeItem = this.items[this.activeIndex];
+    const targetCenter = activeItem
+      ? (activeItem.offsetLeft + (activeItem.offsetWidth / 2))
+      : ((this.activeIndex * 180) + 90);
     const viewportWidth = this.viewportElement.clientWidth || 1200;
     const translateX = Math.round((viewportWidth / 2) - targetCenter);
 

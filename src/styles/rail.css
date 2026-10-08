@@ -200,7 +200,7 @@
 
 .rail-item {
   position: relative;
-  width: 112px; /* Stable fixed slot width on desktop prevents layout shifts */
+  width: 180px; /* Spacious slot width so garments have clear gaps and are easy to select */
   height: 370px;
   flex-shrink: 0;
   display: flex;
@@ -289,8 +289,8 @@
   z-index: 10;
 }
 .rail-item.is-left .rail-garment-3d-box {
-  transform: perspective(800px) rotateY(-34deg) scale(0.95);
-  opacity: 0.92;
+  transform: perspective(800px) rotateY(-22deg) scale(0.96);
+  opacity: 0.94;
 }
 
 /* Right of active garment: angled leftwards towards center */
@@ -298,22 +298,22 @@
   z-index: 10;
 }
 .rail-item.is-right .rail-garment-3d-box {
-  transform: perspective(800px) rotateY(34deg) scale(0.95);
-  opacity: 0.92;
+  transform: perspective(800px) rotateY(22deg) scale(0.96);
+  opacity: 0.94;
 }
 
 /* Subtle organic variation in hanging angle so rack looks natural */
 .rail-item.var-angle-1.is-left .rail-garment-3d-box {
-  transform: perspective(800px) rotateY(-37deg) scale(0.94);
+  transform: perspective(800px) rotateY(-25deg) scale(0.95);
 }
 .rail-item.var-angle-2.is-left .rail-garment-3d-box {
-  transform: perspective(800px) rotateY(-31deg) scale(0.96) translateY(2px);
+  transform: perspective(800px) rotateY(-19deg) scale(0.97) translateY(2px);
 }
 .rail-item.var-angle-1.is-right .rail-garment-3d-box {
-  transform: perspective(800px) rotateY(37deg) scale(0.94);
+  transform: perspective(800px) rotateY(25deg) scale(0.95);
 }
 .rail-item.var-angle-2.is-right .rail-garment-3d-box {
-  transform: perspective(800px) rotateY(31deg) scale(0.96) translateY(2px);
+  transform: perspective(800px) rotateY(19deg) scale(0.97) translateY(2px);
 }
 
 /* Natural Organic Sway Keyframes around the hook */
@@ -508,10 +508,7 @@
   }
   .rail-item {
     scroll-snap-align: center;
-    width: 120px;
-  }
-  .rail-item.is-active {
-    width: 250px;
+    width: 170px;
   }
 }
 
