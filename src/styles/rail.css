@@ -200,7 +200,7 @@
 
 .rail-item {
   position: relative;
-  width: 105px; /* Slot width on desktop */
+  width: 112px; /* Stable fixed slot width on desktop prevents layout shifts */
   height: 370px;
   flex-shrink: 0;
   display: flex;
@@ -215,9 +215,8 @@
   overflow: visible;
   transform-origin: 50% 8px; /* Hook contact point */
   transition:
-    width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    z-index 0.2s ease;
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    z-index 0.15s ease;
 }
 
 /* Natural Organic Sway Physics pivoting from the hook apex */
@@ -335,8 +334,7 @@
    ========================================================================== */
 
 .rail-item.is-active {
-  width: 275px; /* Opens room around active garment */
-  z-index: 25;
+  z-index: 45;
 }
 
 .rail-item.is-active .rail-garment-3d-box {
@@ -355,13 +353,12 @@
 }
 
 /* ==========================================================================
-   Hover & Focus State (Gently opens room and brings forward)
+   Hover & Focus State (Gently elevates without shifting layout)
    ========================================================================== */
 
 .rail-item:hover,
 .rail-item:focus-visible {
-  width: 275px;
-  z-index: 30;
+  z-index: 50;
 }
 
 .rail-item:hover .rail-garment-3d-box,

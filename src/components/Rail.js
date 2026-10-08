@@ -30,6 +30,7 @@ export class ClothingRail {
     this.isSwiping = false;
 
     this.scrollTimeout = null;
+    this.hoverDebounceTimeout = null;
 
     this.init();
   }
@@ -98,19 +99,30 @@ export class ClothingRail {
   bindEvents() {
     // Garment Item Hover, Focus & Click
     this.items.forEach((item, index) => {
-      // Hover (Desktop)
+      // Hover (Desktop): instantly highlight item & info, gently debounce track sliding
       item.addEventListener('mouseenter', () => {
-        this.setActiveItem(index, true);
+        this.highlightItem(index);
+        clearTimeout(this.hoverDebounceTimeout);
+        this.hoverDebounceTimeout = setTimeout(() => {
+          this.updateTrackPosition();
+        }, 150);
+      });
+
+      item.addEventListener('mouseleave', () => {
+        clearTimeout(this.hoverDebounceTimeout);
       });
 
       // Keyboard Focus
       item.addEventListener('focus', () => {
+        clearTimeout(this.hoverDebounceTimeout);
         this.setActiveItem(index, true);
       });
 
-      // Click to open minimal preview
+      // Click to select and immediately open minimal preview
       item.addEventListener('click', (e) => {
         e.preventDefault();
+        clearTimeout(this.hoverDebounceTimeout);
+        this.setActiveItem(index, false);
         this.openPreview(index);
       });
     });
@@ -228,7 +240,7 @@ export class ClothingRail {
     });
   }
 
-  setActiveItem(index, shouldScrollMobile = false) {
+  highlightItem(index) {
     if (index < 0 || index >= PRODUCTS.length) return;
     this.activeIndex = index;
     const currentProduct = PRODUCTS[index];
@@ -259,8 +271,13 @@ export class ClothingRail {
     if (this.activeHintElement) {
       this.activeHintElement.textContent = `Hover to turn · Click to explore`;
     }
+  }
 
-    // If on desktop, slide rail track so active item is centered
+  setActiveItem(index, shouldScrollMobile = false) {
+    if (index < 0 || index >= PRODUCTS.length) return;
+    this.highlightItem(index);
+
+    // Slide rail track so active item is centered
     this.updateTrackPosition();
 
     // If on mobile/tablet where rail overflows, scroll active item into view
@@ -277,19 +294,8 @@ export class ClothingRail {
       return;
     }
 
-    const inactiveWidth = 105;
-    const activeWidth = 275;
-    let targetCenter = 0;
-
-    for (let i = 0; i < this.items.length; i++) {
-      if (i < this.activeIndex) {
-        targetCenter += inactiveWidth;
-      } else if (i === this.activeIndex) {
-        targetCenter += (activeWidth / 2);
-        break;
-      }
-    }
-
+    const itemSlotWidth = 112; // Stable slot width matching rail.css
+    const targetCenter = (this.activeIndex * itemSlotWidth) + (itemSlotWidth / 2);
     const viewportWidth = this.viewportElement.clientWidth || 1200;
     const translateX = Math.round((viewportWidth / 2) - targetCenter);
 

@@ -9,7 +9,7 @@ import { ClothingRail } from './components/Rail.js';
 import { ProductModal } from './components/ProductModal.js';
 import { StoreTicker } from './components/Ticker.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   // Initialize Header Navigation
   const header = new StoreHeader();
 
@@ -37,6 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.open(product, index);
     }
   });
+
+  // Top Header "Shop ↗" Link -> Opens Detailed Shop Sheet for active garment
+  const shopNavBtn = document.getElementById('shopNavBtn');
+  if (shopNavBtn) {
+    shopNavBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.openDetailedShop(rail ? rail.activeIndex : 0);
+    });
+  }
 
   // Check URL query parameters for test automation & deep links
   const urlParams = new URLSearchParams(window.location.search);
@@ -72,4 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Global accessibility helper & initialization log
   console.log('✦ ATELIER NORD interactive clothing rail initialized.');
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+

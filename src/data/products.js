@@ -8,23 +8,23 @@
 
 export const PRODUCTS = [
   {
-    id: "tee-atelier-chrome",
+    id: "hoodie-emerald",
     itemNumber: "01",
-    name: "ATELIER NORD — CHROME TEE",
-    shortName: "Atelier Chrome Tee",
-    descriptor: "Heavyweight Graphic Tee · Optic White",
-    category: "Designer Graphic Tee",
-    price: 75,
-    priceFormatted: "$75.00",
-    color: "Optic White · Metallic Chrome",
-    frontImage: "/garments/tee_atelier_chrome.png",
+    name: "EVERGREEN — FIELD HOODIE",
+    shortName: "Evergreen Hoodie",
+    descriptor: "Oversized Fleece Pullover · Forest Emerald",
+    category: "Oversized Fleece Pullover",
+    price: 130,
+    priceFormatted: "$130.00",
+    color: "Forest Emerald",
+    frontImage: "/garments/hoodie_emerald_front.png",
     backImage: null,
     hasBackView: false,
-    badge: "New Season",
-    description: "Architectural boxy streetwear t-shirt featuring 3D chrome typographic lettering and wireframe cyber-mesh artwork. Crafted from 300 GSM combed cotton with snug rib collar.",
-    fabric: "100% Combed Heavyweight Cotton · 300 GSM",
-    origin: "Milled & finished in Braga, Portugal",
-    fit: "Boxy Drop-Shoulder Silhouette.",
+    badge: "Core Essential",
+    description: "Vibrant deep emerald hoodie engineered with structured boxy silhouette, seamless front pouch pocket, and tonal drawstrings. Double-layered hood retains structure wash after wash.",
+    fabric: "100% GOTS Organic Cotton Fleece · 460 GSM",
+    origin: "Milled & crafted in Guimarães, Portugal",
+    fit: "Subtly Boxy Fit.",
     sizes: ["S", "M", "L", "XL"],
     inStock: true
   },
@@ -224,5 +224,17 @@ export const BRAND_CONFIG = {
   sub: "SARAJEVO",
   tagline: "FROM SARAJEVO, WITH LOVE",
   subtitle: "ON THE RAIL | MOLIMAO / SARAJEVO",
-  metaInfo: "Heavyweight architectural garments · Designed & produced in Sarajevo"
+  metaInfo: "Heavyweight architectural garments · Designed & produced in Sarajevo",
+  tickerItems: [
+    "From Sarajevo, with love",
+    "✦",
+    "Handcrafted Leather Outerwear & Streetwear",
+    "✦",
+    "Archival Italian Lambskin & Heavy French Terry",
+    "✦",
+    "Worldwide Carbon-Neutral Express Shipping",
+    "✦",
+    "Limited Atelier Run"
+  ]
 };
+

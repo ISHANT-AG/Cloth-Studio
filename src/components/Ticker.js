@@ -13,8 +13,18 @@ export class StoreTicker {
   init() {
     if (!this.track) return;
 
+    const items = BRAND_CONFIG.tickerItems && Array.isArray(BRAND_CONFIG.tickerItems)
+      ? BRAND_CONFIG.tickerItems
+      : [
+          "From Sarajevo, with love",
+          "✦",
+          "Handcrafted Leather Outerwear & Streetwear",
+          "✦",
+          "Worldwide Express Shipping"
+        ];
+
     // Build repeating ticker elements for seamless infinite slide
-    const content = BRAND_CONFIG.tickerItems.map(item => {
+    const content = items.map(item => {
       if (item === '✦') {
         return `<span class="ticker-glyph" aria-hidden="true">✦</span>`;
       }
@@ -25,3 +35,4 @@ export class StoreTicker {
     this.track.innerHTML = `${content}${content}${content}${content}`;
   }
 }
+

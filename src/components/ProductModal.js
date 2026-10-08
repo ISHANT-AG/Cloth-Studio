@@ -272,11 +272,17 @@ export class ProductModal {
     }
   }
 
-  openDetailedShop() {
-    const product = PRODUCTS[this.currentIndex];
+  openDetailedShop(customIndex = null) {
+    if (typeof customIndex === 'number' && customIndex >= 0 && customIndex < PRODUCTS.length) {
+      this.currentIndex = customIndex;
+    }
+    const product = PRODUCTS[this.currentIndex] || PRODUCTS[0];
     if (!product || !this.shopDrawer) return;
 
     this.isDrawerOpen = true;
+    if (this.onModalStateChange) {
+      this.onModalStateChange(true, this.currentIndex);
+    }
 
     // Populate Detailed Drawer Data (matching frame_015)
     if (this.shopCategoryTag) {
@@ -314,8 +320,19 @@ export class ProductModal {
       if (this.thumbBackBtn) this.thumbBackBtn.style.display = 'none';
     }
 
-    // Reset form inputs
-    if (this.shopSizeSelect) this.shopSizeSelect.value = '';
+    // Populate sizes
+    if (this.shopSizeSelect) {
+      this.shopSizeSelect.innerHTML = '<option value="">Select size</option>';
+      const sizes = product.sizes || ['S', 'M', 'L', 'XL'];
+      sizes.forEach(sz => {
+        const opt = document.createElement('option');
+        opt.value = sz;
+        opt.textContent = `Size ${sz}`;
+        this.shopSizeSelect.appendChild(opt);
+      });
+      this.shopSizeSelect.value = '';
+    }
+
     if (this.shopQtyInput) this.shopQtyInput.value = '1';
 
     this.shopDrawer.classList.add('is-open');
@@ -332,7 +349,11 @@ export class ProductModal {
     this.shopDrawer.classList.remove('is-open');
     this.shopDrawer.setAttribute('aria-hidden', 'true');
 
-    if (this.viewInShopBtn) this.viewInShopBtn.focus();
+    if (this.isOpen && this.viewInShopBtn) {
+      this.viewInShopBtn.focus();
+    } else if (!this.isOpen && this.onModalStateChange) {
+      this.onModalStateChange(false, this.currentIndex);
+    }
   }
 
   handleAddToCart() {
