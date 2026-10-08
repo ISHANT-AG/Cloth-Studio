@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATELIER NORD ✦ Studio Garment Rail</title>
+  <meta name="description" content="Interactive clothing rail storefront. Explore tactile heavyweight garments crafted with architectural precision and organic materials.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles/index.css">
+  <link rel="stylesheet" href="/src/styles/rail.css">
+  <link rel="stylesheet" href="/src/styles/modal.css">
+</head>
+<body class="satin-backdrop-theme">
+  <!-- Dynamic Layered Satin Ribbon Vector Background -->
+  <div class="satin-canvas-bg" aria-hidden="true">
+    <div class="satin-drift-wrap">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Deep Radiant Crimson Base Glow -->
+          <radialGradient id="baseGlow" cx="50%" cy="46%" r="75%">
+            <stop offset="0%" stop-color="#E6380D"/>
+            <stop offset="30%" stop-color="#BA1B00"/>
+            <stop offset="65%" stop-color="#6A0B00"/>
+            <stop offset="100%" stop-color="#280200"/>
+          </radialGradient>
+
+          <!-- Vivid Fiery Orange Ribbon -->
+          <linearGradient id="vividOrangeGrad" x1="15%" y1="15%" x2="85%" y2="85%">
+            <stop offset="0%" stop-color="#FFA834"/>
+            <stop offset="22%" stop-color="#FF6310"/>
+            <stop offset="55%" stop-color="#D82A06"/>
+            <stop offset="82%" stop-color="#880E00"/>
+            <stop offset="100%" stop-color="#420400"/>
+          </linearGradient>
+
+          <!-- Deep Garnet Shadow Ribbon -->
+          <linearGradient id="deepFoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#D82C06"/>
+            <stop offset="35%" stop-color="#941000"/>
+            <stop offset="70%" stop-color="#500600"/>
+            <stop offset="100%" stop-color="#200100"/>
+          </linearGradient>
+
+          <!-- Warm Amber Golden Ribbon -->
+          <linearGradient id="amberGoldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFBD50"/>
+            <stop offset="28%" stop-color="#FF7514"/>
+            <stop offset="65%" stop-color="#C82404"/>
+            <stop offset="100%" stop-color="#520600"/>
+          </linearGradient>
+
+          <!-- Vermilion Drape Gradient -->
+          <linearGradient id="vermilionGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FF8020"/>
+            <stop offset="35%" stop-color="#E23208"/>
+            <stop offset="70%" stop-color="#921000"/>
+            <stop offset="100%" stop-color="#380300"/>
+          </linearGradient>
+
+          <!-- Golden Rim Specular Highlight 1 -->
+          <linearGradient id="goldRimGleam1" x1="0%" y1="0%" x2="100%" y2="35%">
+            <stop offset="0%" stop-color="#FFFDF5" stop-opacity="0.95"/>
+            <stop offset="20%" stop-color="#FFD175" stop-opacity="0.9"/>
+            <stop offset="55%" stop-color="#FF7A18" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#B01C00" stop-opacity="0"/>
+          </linearGradient>
+
+          <!-- Golden Rim Specular Highlight 2 -->
+          <linearGradient id="goldRimGleam2" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFF5D8" stop-opacity="0.95"/>
+            <stop offset="25%" stop-color="#FFBD40" stop-opacity="0.85"/>
+            <stop offset="68%" stop-color="#DE3606" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#6E0A00" stop-opacity="0"/>
+          </linearGradient>
+
+          <!-- Volumetric Satin Shadows -->
+          <filter id="satinShadowDeep" x="-20%" y="-20%" width="150%" height="150%">
+            <feDropShadow dx="-10" dy="24" stdDeviation="28" flood-color="#160100" flood-opacity="0.85"/>
+          </filter>
+          <filter id="satinShadowMid" x="-20%" y="-20%" width="150%" height="150%">
+            <feDropShadow dx="-6" dy="16" stdDeviation="20" flood-color="#180100" flood-opacity="0.7"/>
+          </filter>
+        </defs>
+
+        <!-- Base Canvas -->
+        <rect width="100%" height="100%" fill="url(#baseGlow)"/>
+
+        <!-- Ribbon 1: Bottom Deep Swell -->
+        <path d="M680,1080 C1000,810 1460,910 1920,700 L1920,1080 Z"
+              fill="url(#deepFoldGrad)"/>
+
+        <!-- Ribbon 2: Bottom Sweeping Wave -->
+        <g filter="url(#satinShadowDeep)">
+          <path d="M-100,890 C280,630 690,830 1190,690 C1630,550 1830,790 2060,650 L2060,1180 L-100,1180 Z"
+                fill="url(#vividOrangeGrad)"/>
+          <path d="M-100,890 C280,630 690,830 1190,690 C1630,550 1830,790 2060,650"
+                stroke="url(#goldRimGleam1)" stroke-width="4.5" fill="none"/>
+        </g>
+
+        <!-- Ribbon 3: Bottom Left Fold -->
+        <g filter="url(#satinShadowDeep)">
+          <path d="M-150,1080 C50,760 380,830 730,1080 Z"
+                fill="url(#amberGoldGrad)"/>
+          <path d="M-150,1080 C50,760 380,830 730,1080"
+                stroke="url(#goldRimGleam2)" stroke-width="4" fill="none"/>
+        </g>
+
+        <!-- Ribbon 4: Central Flowing Satin Drape -->
+        <g filter="url(#satinShadowDeep)">
+          <path d="M-120,430 C320,230 760,530 1290,330 C1750,150 1890,410 2160,300 L2160,1180 L-120,1180 Z"
+                fill="url(#vividOrangeGrad)"/>
+          <path d="M-120,430 C320,230 760,530 1290,330 C1750,150 1890,410 2160,300"
+                stroke="url(#goldRimGleam1)" stroke-width="4.5" fill="none"/>
+        </g>
+
+        <!-- Ribbon 5: Upper Cascading Ribbon Swoop -->
+        <g filter="url(#satinShadowMid)">
+          <path d="M-100,150 C380,5 780,250 1270,110 C1750,-30 1870,180 2110,80 L2110,610 C1830,490 1490,590 1110,490 C750,390 350,520 -100,330 Z"
+                fill="url(#vermilionGrad)"/>
+          <path d="M-100,150 C380,5 780,250 1270,110 C1750,-30 1870,180 2110,80"
+                stroke="url(#goldRimGleam2)" stroke-width="4" fill="none"/>
+        </g>
+
+        <!-- Ribbon 6: Top Cresting Golden Silk Drape -->
+        <g filter="url(#satinShadowMid)">
+          <path d="M-60,-40 C340,-140 760,80 1250,-50 C1690,-170 1890,50 2070,-20 L2070,310 C1790,210 1430,330 1090,230 C730,130 330,270 -60,110 Z"
+                fill="url(#amberGoldGrad)" opacity="0.94"/>
+          <path d="M-60,-40 C340,-140 760,80 1250,-50 C1690,-170 1890,50 2070,-20"
+                stroke="url(#goldRimGleam1)" stroke-width="4" fill="none"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- The Elevated Warm Ivory Storefront Card (32–48px background visible around panel on desktop) -->
+  <div class="storefront-viewport-wrap">
+    <div class="storefront-card" id="storefrontCard">
+      <!-- Minimalist Brand Header -->
+      <header class="store-header" role="banner">
+        <div class="header-left">
+          <button class="nav-toggle-btn" id="menuToggle" aria-label="Open main menu" aria-expanded="false" aria-controls="navDrawer">
+            <span class="hamburger-icon" aria-hidden="true">
+              <span class="line line-1"></span>
+              <span class="line line-2"></span>
+            </span>
+            <span class="nav-label">Menu</span>
+          </button>
+        </div>
+
+        <div class="header-center">
+          <a href="/" class="brand-logo" aria-label="Molimao Home">
+            <span class="brand-star">✦</span>
+            <span class="brand-title">MOLIMAO</span>
+          </a>
+          <span class="brand-sub">SARAJEVO</span>
+        </div>
+
+        <div class="header-right">
+          <a href="#collection" class="shop-link" id="shopNavBtn">
+            <span>Shop</span>
+            <svg class="arrow-icon" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <button class="cart-btn" id="cartBtn" aria-label="Shopping bag, 0 items">
+            <svg class="bag-icon" width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M2 5H14V16C14 16.5523 13.5523 17 13 17H3C2.44772 17 2 16.5523 2 16V5Z" stroke="currentColor" stroke-width="1.3"/>
+              <path d="M5.5 5V3.5C5.5 2.11929 6.61929 1 8 1C9.38071 1 10.5 2.11929 10.5 3.5V5" stroke="currentColor" stroke-width="1.3"/>
+            </svg>
+            <span class="cart-count" id="cartCounter">0</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Showcase Area -->
+      <main class="store-main" id="mainContent" role="main">
+        <!-- Subtitle Collection Tag -->
+        <div class="rail-breadcrumbs" aria-hidden="true">
+          <span class="rail-tag-label">ON THE RAIL</span>
+          <span class="rail-tag-divider">|</span>
+          <span class="rail-tag-sub">MOLIMAO / SARAJEVO</span>
+        </div>
+
+        <!-- The Interactive Metal Clothing Rail -->
+        <section class="rail-section" id="railSection" aria-label="Interactive Garment Rail">
+          <!-- Rail Wall Mounted Structure -->
+          <div class="rail-structure-wrap" aria-hidden="true">
+            <div class="rail-mount bracket-left">
+              <span class="bracket-bolt"></span>
+            </div>
+            <div class="metal-rod">
+              <div class="metal-rod-sheen"></div>
+            </div>
+            <div class="rail-mount bracket-right">
+              <span class="bracket-bolt"></span>
+            </div>
+          </div>
+
+          <!-- Secondary Navigation Arrows (Desktop quiet, mobile accessible) -->
+          <button class="rail-nav-btn rail-nav-prev" id="railSlidePrev" aria-label="Previous garment" title="Previous garment">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="rail-nav-btn rail-nav-next" id="railSlideNext" aria-label="Next garment" title="Next garment">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Garments Stage Viewport: 8–10 garments displayed together -->
+          <div class="rail-stage-viewport" id="railViewport" tabindex="0" role="region" aria-label="Garments hanging on rail. Use left and right arrow keys or hover to browse. Click to inspect.">
+            <div class="rail-garments-track" id="railTrack" role="list">
+              <!-- Dynamic Garment Items injected by Rail.js -->
+            </div>
+          </div>
+
+          <!-- Quiet Index Indicator -->
+          <div class="rail-index-wrap" id="railIndexWrap">
+            <span class="rail-quiet-index" id="railCounterPill">06 / 10</span>
+          </div>
+
+          <!-- Active Product Information (closely composed beneath garments) -->
+          <div class="rail-footer-info" id="railActiveFooter">
+            <h2 class="active-item-title" id="railActiveTitle">Borovi — Oversized Hoodie</h2>
+            <div class="active-item-hint" id="railActiveHint">Hover to turn &middot; Click to explore</div>
+            <button class="active-item-cta" id="railActiveCta" aria-label="Explore active garment">
+              <span>Explore Molimao</span>
+              <svg width="9" height="9" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </section>
+      </main>
+
+        <!-- Minimal Centered Product Preview (Matching frame_010.png) -->
+        <div class="minimal-preview-stage" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle" aria-hidden="true">
+          <!-- Quiet Close Button at Panel's Upper Right -->
+          <button class="minimal-close-btn" id="modalCloseBtn" aria-label="Close product preview (Press Escape)">
+            <span class="minimal-close-text">Close</span>
+            <span class="minimal-close-icon">&times;</span>
+          </button>
+
+          <!-- Centered Garment Visualizer & Metadata -->
+          <div class="minimal-preview-center">
+            <!-- Centered Garment on Hanger -->
+            <div class="minimal-garment-wrapper">
+              <div class="minimal-hanger-hook" aria-hidden="true"></div>
+              <div class="garment-flip-container" id="garmentFlipContainer">
+                <div class="garment-card-front" id="garmentCardFront">
+                  <img id="modalFrontImg" src="" alt="Garment front view" class="minimal-garment-image">
+                </div>
+                <div class="garment-card-back" id="garmentCardBack">
+                  <img id="modalBackImg" src="" alt="Garment back view" class="minimal-garment-image">
+                </div>
+              </div>
+            </div>
+
+            <!-- Metadata & Actions Directly Below Garment -->
+            <div class="minimal-preview-meta">
+              <span class="minimal-item-index" id="modalCounter">02 / 10</span>
+              <h1 class="minimal-item-title" id="modalProductTitle">FORORA — REIGN</h1>
+              <p class="minimal-item-desc" id="modalDescriptor">Football jersey &middot; Black</p>
+
+              <!-- Front / Back Toggle (Only visible if genuine matching back asset exists) -->
+              <div class="minimal-toggle-bar" id="viewToggleBar">
+                <button class="minimal-toggle-btn active" id="viewFrontBtn" aria-label="Show front view" aria-pressed="true">Front</button>
+                <span class="minimal-toggle-sep">|</span>
+                <button class="minimal-toggle-btn" id="viewBackBtn" aria-label="Show back view" aria-pressed="false">Back</button>
+              </div>
+
+              <!-- Bottom Row: Brand Label & View In Shop Link -->
+              <div class="minimal-preview-footer">
+                <span class="minimal-brand-tag">Molimao</span>
+                <button class="minimal-shop-action" id="viewInShopBtn">
+                  <span>View in the shop</span>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Product Sheet (Triggered by "View in the shop", matching frame_015.png) -->
+        <div class="detailed-shop-drawer" id="detailedShopDrawer" role="dialog" aria-modal="true" aria-labelledby="shopDrawerTitle" aria-hidden="true">
+          <div class="detailed-shop-overlay" id="shopDrawerOverlay"></div>
+          <div class="detailed-shop-container">
+            <!-- Header with Back / Close Button -->
+            <div class="detailed-shop-header">
+              <button class="detailed-back-btn" id="shopDrawerCloseBtn" aria-label="Back to preview">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <span>Back</span>
+              </button>
+              <span class="detailed-shop-brand">✦ MOLIMAO</span>
+              <button class="detailed-close-icon" id="shopDrawerCloseXBtn" aria-label="Close detailed view">&times;</button>
+            </div>
+
+            <!-- Detailed Shop Grid: Gallery on left, Purchasing on right -->
+            <div class="detailed-shop-grid">
+              <!-- Left: Gallery Stage & Thumbnails -->
+              <div class="detailed-gallery-pane">
+                <div class="detailed-main-image-wrap">
+                  <img id="shopMainImg" src="" alt="Product detailed view" class="detailed-main-img">
+                </div>
+                <div class="detailed-thumbs-row" id="shopThumbsRow">
+                  <button class="thumb-btn active" id="thumbFrontBtn" aria-label="Select front view">
+                    <img id="thumbFrontImg" src="" alt="Thumbnail front">
+                  </button>
+                  <button class="thumb-btn" id="thumbBackBtn" aria-label="Select back view">
+                    <img id="thumbBackImg" src="" alt="Thumbnail back">
+                  </button>
+                </div>
+              </div>
+
+              <!-- Right: Product Specifications & Add to Cart -->
+              <div class="detailed-info-pane">
+                <div class="shop-category-tag" id="shopCategoryTag">CATEGORY: T-SHIRT, WOMEN</div>
+                <h2 class="shop-product-title" id="shopDrawerTitle">Cupid, women’s oversize T-Shirt</h2>
+                <div class="shop-price-tag" id="shopPriceTag">50.00 KM</div>
+
+                <div class="shop-desc-text" id="shopDescText">
+                  Oversized dark gray T-shirt with a printed illustration on the chest and the typography "Sarajevo loves you"
+                </div>
+                <div class="shop-origin-text">Designed and produced in BiH.</div>
+
+                <div class="shop-size-chart-link">
+                  <button type="button" class="size-chart-btn" id="sizeChartBtn">SIZE CHART</button>
+                </div>
+
+                <!-- Size Selection Dropdown -->
+                <div class="shop-form-group">
+                  <label for="shopSizeSelect" class="shop-form-label">Size</label>
+                  <select id="shopSizeSelect" class="shop-size-dropdown">
+                    <option value="">Choose an option</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                  </select>
+                </div>
+
+                <!-- Quantity & Add to Cart -->
+                <div class="shop-purchase-row">
+                  <div class="shop-qty-box">
+                    <label for="shopQtyInput" class="visually-hidden">Quantity</label>
+                    <input type="number" id="shopQtyInput" class="shop-qty-input" value="1" min="1" max="10">
+                  </div>
+                  <button class="shop-add-cart-btn" id="shopAddToCartBtn">Add to cart</button>
+                </div>
+
+                <div class="shop-sku-row">
+                  <span class="shop-sku-label">SKU:</span>
+                  <span class="shop-sku-val" id="shopSkuVal">N/A</span>
+                </div>
+
+                <!-- Delivery Options Info Box (Matching reference frame_015) -->
+                <div class="delivery-options-box">
+                  <div class="delivery-box-title">Delivery options</div>
+                  <p class="delivery-box-text">
+                    Delivery options in Bosnia and Herzegovina are done by BH Post (delivery in 2 to 3 working days), priced at 4 KM, but if your order is over 50 KM, delivery is free. Delivery by Express Mail, delivery time is 24h to 48h, price is 7 KM, but if your order is over 100 KM, express mail is free.
+                  </p>
+                  <p class="delivery-box-sub">
+                    Delivery worldwide is available and is delivered by BH POST. Price depends on the country and the weight of the ordered products, time of the delivery approximately 2 weeks.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add to Cart Toast Notification -->
+        <div class="cart-toast" id="cartToast" role="status" aria-live="polite">
+          <span class="toast-check">✓</span>
+          <span class="toast-msg" id="toastMsg">Added to cart</span>
+        </div>
+
+      <!-- Bottom Brand Ticker Ribbon (Warm Orange / Vermilion) -->
+      <footer class="store-ticker" role="contentinfo">
+        <div class="ticker-track" id="tickerTrack" aria-hidden="true">
+          <!-- Replicated marquee content injected by Ticker.js -->
+        </div>
+      </footer>
+
+      <!-- Slide-out Navigation Drawer -->
+      <aside class="nav-drawer" id="navDrawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+        <div class="drawer-header">
+          <span class="drawer-title">Navigation</span>
+          <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">&times;</button>
+        </div>
+        <div class="drawer-content">
+          <ul class="drawer-links">
+            <li><a href="#collection" class="drawer-link">Autumn / Winter '26</a></li>
+            <li><a href="#archive" class="drawer-link">Archive Selection</a></li>
+            <li><a href="#philosophy" class="drawer-link">Material Philosophy</a></li>
+            <li><a href="#stockists" class="drawer-link">Stockists &middot; Studio</a></li>
+          </ul>
+          <div class="drawer-meta">
+            <p class="drawer-note">Architectural apparel designed and produced in Sarajevo.</p>
+            <p class="drawer-specs">✦ Molimao Studio Rail</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,575 @@
+/* ==========================================================================
+   ATELIER NORD / MOLIMAO — Clothing Rail Component
+   Desktop rail composition: 8–10 garments hanging simultaneously,
+   deliberate overlap, angled resting perspective, thin brushed rod,
+   hook apex contact, and tightly composed first-screen layout.
+   ========================================================================== */
+
+.rail-section {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0.5rem 1.5rem 0.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  transition: filter 0.45s ease, opacity 0.45s ease;
+}
+
+/* Blurred & dimmed state when minimal product preview is open */
+.rail-section.is-blurred {
+  filter: blur(14px);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Physical Metal Rail Structure (Thin Brushed Metal Bar)
+   ========================================================================== */
+
+.rail-structure-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1260px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* Small, Refined Aluminum End Brackets */
+.rail-mount {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px;
+  height: 20px;
+  background: linear-gradient(135deg, #ECE8E2 0%, #D0C9BD 50%, #A0988A 100%);
+  border-radius: 2.5px;
+  box-shadow: 0 3px 8px rgba(28, 26, 24, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 16;
+}
+
+.bracket-left {
+  left: 0;
+}
+
+.bracket-right {
+  right: 0;
+}
+
+.bracket-bolt {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background-color: #645D52;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6), 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+/* Continuous Thinner Brushed Metallic Rod (3.5px) */
+.metal-rod {
+  position: relative;
+  width: 100%;
+  height: 3.5px;
+  margin: 0 8px;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #E8E3DA 30%,
+    #C6BFB1 65%,
+    #7E7667 100%
+  );
+  border-radius: 2px;
+  box-shadow:
+    0 4px 10px rgba(28, 26, 24, 0.12),
+    0 1px 2px rgba(28, 26, 24, 0.08);
+}
+
+.metal-rod-sheen {
+  position: absolute;
+  top: 0.5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* ==========================================================================
+   Quiet Secondary Navigation Arrows
+   Visually secondary while retaining accessible hit areas
+   ========================================================================== */
+
+.rail-nav-btn {
+  position: absolute;
+  top: 38%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(28, 26, 24, 0.09);
+  box-shadow: 0 4px 14px rgba(28, 26, 24, 0.08);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 35;
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.rail-nav-btn:hover {
+  background-color: #FFFFFF;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 8px 20px rgba(28, 26, 24, 0.14);
+}
+
+.rail-nav-btn:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.rail-nav-btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.rail-nav-btn.is-disabled {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.rail-nav-prev {
+  left: 0.5rem;
+}
+
+.rail-nav-next {
+  right: 0.5rem;
+}
+
+/* ==========================================================================
+   Rail Stage Viewport & Track: 8–10 Garments Composition
+   ========================================================================== */
+
+/* ==========================================================================
+   Rail Stage Viewport & Track: 8–10 Garments Sliding Composition
+   ========================================================================== */
+
+.rail-stage-viewport {
+  width: 100%;
+  max-width: 1280px;
+  margin-top: -6px; /* Positions hanger hook apex directly touching the rod */
+  outline: none;
+  overflow: hidden; /* Smooth sliding along the metallic rail without clipping brackets */
+  padding: 0;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+  user-select: none;
+  mask-image: linear-gradient(to right, transparent 0%, black 60px, black calc(100% - 60px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 60px, black calc(100% - 60px), transparent 100%);
+}
+
+.rail-garments-track {
+  display: flex;
+  align-items: flex-start;
+  height: 370px;
+  width: max-content;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* ==========================================================================
+   Individual Garment Item
+   Inactive items are allocated 105px slot width with full 345px tall image
+   with deliberate realistic boutique overlap and angled 3D perspective.
+   Active/centered item expands to 275px and faces straight forward.
+   ========================================================================== */
+
+.rail-item {
+  position: relative;
+  width: 105px; /* Slot width on desktop */
+  height: 370px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  transform-origin: 50% 8px; /* Hook contact point */
+  transition:
+    width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    z-index 0.2s ease;
+}
+
+/* Natural Organic Sway Physics pivoting from the hook apex */
+.rail-garment-sway-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  transform-origin: 50% 8px; /* Hook apex pivot */
+  animation: naturalRailSway var(--sway-duration, 5.6s) ease-in-out infinite alternate;
+  animation-delay: var(--sway-delay, 0s);
+  will-change: transform;
+}
+
+/* 3D Hanging Perspective Container (Full tall garment dimensions) */
+.rail-garment-3d-box {
+  position: relative;
+  width: 260px; /* Garment natural width maintained */
+  height: 370px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  transform-origin: 50% 8px;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease;
+}
+
+/* Garment Cutout Image (Clean Transparent PNG) */
+.rail-garment-img {
+  height: 345px;
+  width: auto;
+  max-width: 260px;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  /* Hook apex alignment: top pixel at y=12 in 900px asset, scaled to ~5.6px */
+  margin-top: -3.5px;
+  filter: drop-shadow(0 14px 22px rgba(28, 24, 20, 0.12));
+  transition:
+    filter 0.4s ease,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Natural differences in garment length */
+.rail-item[data-id^="hoodie"] .rail-garment-img,
+.rail-item[data-id^="borovi"] .rail-garment-img {
+  height: 360px;
+}
+.rail-item[data-id^="leather"] .rail-garment-img,
+.rail-item[data-id^="jacket"] .rail-garment-img {
+  height: 360px;
+}
+.rail-item[data-id^="tee"] .rail-garment-img {
+  height: 340px;
+}
+.rail-item[data-id^="forora"] .rail-garment-img {
+  height: 345px;
+}
+
+/* ==========================================================================
+   Resting Inactive Garments: Overlapping 3D Perspective Angles
+   Left items turn slightly inward, Right items turn slightly inward
+   ========================================================================== */
+
+/* Left of active garment: angled rightwards towards center */
+.rail-item.is-left {
+  z-index: 10;
+}
+.rail-item.is-left .rail-garment-3d-box {
+  transform: perspective(800px) rotateY(-34deg) scale(0.95);
+  opacity: 0.92;
+}
+
+/* Right of active garment: angled leftwards towards center */
+.rail-item.is-right {
+  z-index: 10;
+}
+.rail-item.is-right .rail-garment-3d-box {
+  transform: perspective(800px) rotateY(34deg) scale(0.95);
+  opacity: 0.92;
+}
+
+/* Subtle organic variation in hanging angle so rack looks natural */
+.rail-item.var-angle-1.is-left .rail-garment-3d-box {
+  transform: perspective(800px) rotateY(-37deg) scale(0.94);
+}
+.rail-item.var-angle-2.is-left .rail-garment-3d-box {
+  transform: perspective(800px) rotateY(-31deg) scale(0.96) translateY(2px);
+}
+.rail-item.var-angle-1.is-right .rail-garment-3d-box {
+  transform: perspective(800px) rotateY(37deg) scale(0.94);
+}
+.rail-item.var-angle-2.is-right .rail-garment-3d-box {
+  transform: perspective(800px) rotateY(31deg) scale(0.96) translateY(2px);
+}
+
+/* Natural Organic Sway Keyframes around the hook */
+@keyframes naturalRailSway {
+  0% {
+    transform: rotate(calc(var(--sway-angle, 0.9deg) * -1));
+  }
+  50% {
+    transform: rotate(calc(var(--sway-angle, 0.9deg) * 0.25));
+  }
+  100% {
+    transform: rotate(var(--sway-angle, 0.9deg));
+  }
+}
+
+/* ==========================================================================
+   Active Garment State (Centrally Emphasized)
+   ========================================================================== */
+
+.rail-item.is-active {
+  width: 275px; /* Opens room around active garment */
+  z-index: 25;
+}
+
+.rail-item.is-active .rail-garment-3d-box {
+  transform: perspective(800px) rotateY(0deg) scale(1.08) translateY(-4px);
+  opacity: 1;
+}
+
+.rail-item.is-active .rail-garment-img {
+  height: 370px;
+  max-width: 285px;
+  filter: drop-shadow(0 24px 38px rgba(28, 24, 20, 0.24));
+}
+
+.rail-item.is-active .rail-garment-sway-wrap {
+  animation-play-state: paused;
+}
+
+/* ==========================================================================
+   Hover & Focus State (Gently opens room and brings forward)
+   ========================================================================== */
+
+.rail-item:hover,
+.rail-item:focus-visible {
+  width: 275px;
+  z-index: 30;
+}
+
+.rail-item:hover .rail-garment-3d-box,
+.rail-item:focus-visible .rail-garment-3d-box {
+  transform: perspective(800px) rotateY(0deg) scale(1.08) translateY(-6px);
+  opacity: 1;
+}
+
+.rail-item:hover .rail-garment-img,
+.rail-item:focus-visible .rail-garment-img {
+  height: 370px;
+  max-width: 285px;
+  filter: drop-shadow(0 26px 42px rgba(28, 24, 20, 0.26));
+}
+
+.rail-item:hover .rail-garment-sway-wrap,
+.rail-item:focus-visible .rail-garment-sway-wrap {
+  animation-play-state: paused;
+}
+
+/* Keyboard Accessible Focus */
+.rail-item:focus-visible {
+  outline: none;
+}
+.rail-item:focus-visible .rail-garment-3d-box {
+  filter: drop-shadow(0 0 0 2px var(--border-focus)) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.2));
+}
+
+/* ==========================================================================
+   Quiet Index Indicator (replaces prominent pagination dots)
+   ========================================================================== */
+
+.rail-index-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+.rail-quiet-index {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Active Product Information (Closely composed beneath garments)
+   ========================================================================== */
+
+.rail-footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.active-item-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.active-item-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.active-item-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(28, 26, 24, 0.04);
+  border: 1px solid rgba(28, 26, 24, 0.12);
+  border-radius: 999px;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.active-item-cta:hover {
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.active-item-cta:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Reduced Motion Preferences
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-garment-sway-wrap {
+    animation: none !important;
+  }
+  .rail-item,
+  .rail-garment-3d-box,
+  .rail-garment-img {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+
+/* Tablets / Medium screens: 1080px and below */
+@media (max-width: 1080px) {
+  .rail-stage-viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 24px;
+    justify-content: flex-start;
+  }
+  .rail-stage-viewport::-webkit-scrollbar {
+    display: none;
+  }
+  .rail-garments-track {
+    width: max-content;
+    justify-content: flex-start;
+    padding: 0 40px;
+  }
+  .rail-item {
+    scroll-snap-align: center;
+    width: 120px;
+  }
+  .rail-item.is-active {
+    width: 250px;
+  }
+}
+
+/* Mobile Screens (< 768px): 1 prominent main garment + partial neighbors */
+@media (max-width: 768px) {
+  .rail-section {
+    padding: 0.25rem 0.75rem 0.75rem 0.75rem;
+  }
+  .rail-structure-wrap {
+    height: 18px;
+  }
+  .metal-rod {
+    height: 3px;
+  }
+  .rail-mount {
+    width: 7px;
+    height: 16px;
+  }
+  .rail-stage-viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 12px;
+  }
+  .rail-garments-track {
+    width: max-content;
+    height: 380px;
+    padding: 0 calc(50vw - 120px);
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .rail-item {
+    width: 220px !important;
+    height: 380px;
+    scroll-snap-align: center;
+  }
+  .rail-item .rail-garment-3d-box {
+    width: 210px;
+    height: 370px;
+    transform: none !important;
+    opacity: 0.75;
+  }
+  .rail-item.is-active .rail-garment-3d-box {
+    opacity: 1;
+    transform: scale(1.04) translateY(-4px) !important;
+  }
+  .rail-garment-img {
+    max-height: 350px;
+  }
+  .active-item-title {
+    font-size: 1rem;
+  }
+  .rail-nav-btn {
+    display: none; /* Swipe is primary on mobile */
+  }
+}

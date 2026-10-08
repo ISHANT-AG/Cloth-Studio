@@ -1,0 +1,705 @@
+/* ==========================================================================
+   ATELIER NORD / MOLIMAO — Minimal Centered Preview & Detailed Shop View
+   Faithfully matches reference frame_010 (minimal centered preview)
+   and frame_015 (detailed shop drawer with size select and cart actions).
+   ========================================================================== */
+
+/* Subdue surrounding header elements when minimal preview is active */
+.storefront-card.is-preview-active .store-header {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.storefront-card.is-preview-active .rail-breadcrumbs,
+.storefront-card.is-preview-active .rail-footer-info {
+  opacity: 0 !important;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* ==========================================================================
+   1. Minimal Centered Preview Stage (Matching frame_010.png)
+   Directly inside the warm ivory storefront panel.
+   Surrounding rail is softly blurred and faded behind it.
+   ========================================================================== */
+
+.minimal-preview-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem 2rem 2rem;
+  box-sizing: border-box;
+  background-color: rgba(248, 245, 238, 0.98);
+  border-radius: 28px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.minimal-preview-stage.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Quiet Close Button in Panel's Upper-Right */
+.minimal-close-btn {
+  position: absolute;
+  top: 1.8rem;
+  right: 2.4rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  background-color: rgba(28, 26, 24, 0.05);
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+  z-index: 220;
+}
+
+.minimal-close-btn:hover {
+  background-color: rgba(28, 26, 24, 0.06);
+}
+
+.minimal-close-btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.minimal-close-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* Centered Stage: Garment + Metadata */
+.minimal-preview-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: -1rem;
+}
+
+.minimal-preview-stage.is-open .minimal-preview-center {
+  transform: scale(1) translateY(0);
+}
+
+/* Garment Wrapper on Hanger */
+.minimal-garment-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 350px;
+  height: 350px;
+}
+
+/* 3D Flip Container for Front / Back Views */
+.garment-flip-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.garment-flip-container.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.garment-card-front,
+.garment-card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.garment-card-back {
+  transform: rotateY(180deg);
+}
+
+.minimal-garment-image {
+  max-width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 36px rgba(28, 24, 20, 0.2));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Metadata Directly Beneath Garment */
+.minimal-preview-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.minimal-item-index {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.minimal-item-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 0 0 0.2rem 0;
+}
+
+.minimal-item-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.6rem 0;
+  letter-spacing: 0.03em;
+}
+
+/* Front / Back Toggle Pills */
+.minimal-toggle-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(28, 26, 24, 0.04);
+  border: 1px solid rgba(28, 26, 24, 0.08);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.85rem;
+}
+
+.minimal-toggle-bar.is-disabled {
+  display: none;
+}
+
+.minimal-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  transition: all var(--transition-fast);
+}
+
+.minimal-toggle-btn.active {
+  color: var(--text-primary);
+  font-weight: 600;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(28, 26, 24, 0.08);
+}
+
+.minimal-toggle-sep {
+  font-size: 0.65rem;
+  color: var(--border-medium);
+}
+
+/* Footer Row: Brand Wordmark (left) & "View in the shop ↗" (right) */
+.minimal-preview-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 320px;
+  max-width: 90vw;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(28, 26, 24, 0.08);
+}
+
+.minimal-brand-tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.minimal-shop-action {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.minimal-shop-action:hover {
+  opacity: 0.75;
+  transform: translateX(1px);
+}
+
+.minimal-shop-action:focus-visible {
+  outline: 2px solid var(--border-focus);
+}
+
+/* ==========================================================================
+   2. Detailed Product Sheet / Shop Drawer (Matching frame_015.png)
+   Opened via "View in the shop ↗" for size selection and checkout
+   ========================================================================== */
+
+.detailed-shop-drawer {
+  position: absolute;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    opacity 0.4s var(--ease-spring),
+    visibility 0.4s var(--ease-spring);
+}
+
+.detailed-shop-drawer.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.detailed-shop-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(28, 26, 24, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.detailed-shop-container {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  height: 100%;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  z-index: 160;
+  box-shadow: -15px 0 45px rgba(28, 26, 24, 0.14);
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.detailed-shop-drawer.is-open .detailed-shop-container {
+  transform: translateX(0);
+}
+
+/* Sticky Detailed Header */
+.detailed-shop-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border-hairline);
+  background-color: #FAF8F5;
+}
+
+.detailed-back-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  transition: background-color var(--transition-fast);
+}
+
+.detailed-back-btn:hover {
+  background-color: rgba(28, 26, 24, 0.06);
+}
+
+.detailed-shop-brand {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.detailed-close-icon {
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 0.3rem 0.6rem;
+}
+
+/* Detailed Shop Grid: Gallery on left, Info on right */
+.detailed-shop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  flex: 1;
+  padding: 2.5rem;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+/* Gallery Pane */
+.detailed-gallery-pane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.detailed-main-image-wrap {
+  width: 100%;
+  max-width: 360px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FAF8F5;
+  border-radius: 14px;
+  padding: 1rem;
+  border: 1px solid var(--border-hairline);
+}
+
+.detailed-main-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 24px rgba(28, 26, 24, 0.12));
+}
+
+.detailed-thumbs-row {
+  display: flex;
+  gap: 0.85rem;
+}
+
+.thumb-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  border: 1px solid var(--border-medium);
+  background-color: #FAF8F5;
+  padding: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.thumb-btn.active {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 0 1px var(--text-primary);
+}
+
+.thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Info Pane */
+.detailed-info-pane {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-category-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.shop-product-title {
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.25;
+}
+
+.shop-price-tag {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.shop-desc-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.shop-origin-text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.shop-size-chart-link {
+  margin-bottom: 1rem;
+}
+
+.size-chart-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: #DE3B10;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* Size Selection Dropdown */
+.shop-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.shop-form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.shop-size-dropdown {
+  width: 100%;
+  max-width: 320px;
+  height: 42px;
+  padding: 0 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-medium);
+  background-color: #FFFFFF;
+  font-size: 0.86rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.shop-size-dropdown:focus {
+  border-color: var(--text-primary);
+}
+
+/* Purchase Row: Qty + Add to Cart */
+.shop-purchase-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.shop-qty-box {
+  width: 68px;
+}
+
+.shop-qty-input {
+  width: 100%;
+  height: 44px;
+  text-align: center;
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  outline: none;
+}
+
+.shop-add-cart-btn {
+  flex: 1;
+  max-width: 240px;
+  height: 44px;
+  background-color: #E2DFD9;
+  color: var(--text-primary);
+  border: none;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.shop-add-cart-btn:hover {
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.shop-sku-row {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.shop-sku-label {
+  font-weight: 600;
+}
+
+/* Delivery Options Info Box (Light blue/gray background matching frame_015) */
+.delivery-options-box {
+  background-color: #E8F0F8;
+  border-radius: 8px;
+  padding: 1.25rem 1.4rem;
+  margin-top: 1rem;
+}
+
+.delivery-box-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1A3A5A;
+  margin-bottom: 0.5rem;
+}
+
+.delivery-box-text,
+.delivery-box-sub {
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: #324D68;
+  margin-bottom: 0.5rem;
+}
+
+.delivery-box-sub:last-child {
+  margin-bottom: 0;
+}
+
+/* Add to Cart Toast */
+.cart-toast {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 200;
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s var(--ease-spring), opacity 0.35s ease;
+}
+
+.cart-toast.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast-check {
+  color: #55D480;
+  font-weight: 700;
+}
+
+/* Responsive Adaptations for Detailed Shop View & Minimal Preview */
+@media (max-width: 820px) {
+  .detailed-shop-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  .detailed-main-image-wrap {
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .minimal-close-btn {
+    top: 0.85rem;
+    right: 0.85rem;
+    font-size: 0.72rem;
+    padding: 0.35rem 0.6rem;
+    z-index: 150;
+  }
+  .minimal-preview-stage {
+    padding: 0.75rem 1rem 1rem 1rem;
+    justify-content: center;
+  }
+  .minimal-garment-wrapper {
+    height: 310px;
+  }
+  .minimal-garment-image {
+    max-height: 300px;
+  }
+  .minimal-preview-center {
+    margin-top: 0.25rem;
+  }
+  .minimal-preview-footer {
+    width: 100%;
+    max-width: 290px;
+    margin-top: 0.75rem;
+  }
+  .minimal-item-title {
+    font-size: 1.05rem;
+  }
+  .minimal-item-caption {
+    margin-top: 0.5rem;
+  }
+}
